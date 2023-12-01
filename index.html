@@ -8,7 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://rsms.me/">
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-<link rel="stylesheet" href="https://your-font-file-host/inter.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <!--Open San, Nunito family -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
@@ -17,8 +18,22 @@
         <img class="logo" src="assets/images/logo.png" alt="logo"> Love Maths
     </h1>
 
-    <div class="game-aera"></div>
-
+    <div class="game-aera">
+        <div class="controls-area">
+            <button class="btn btn--big btn--green"> <i class="fas fa-plus"></i></button>
+            <button class="btn btn--big btn--blue"> <i class="fa fa-minus" aria-hidden="true"></i></i></button>
+            <button class="btn btn--big btn--orange"> <i class="fas fa-times"></i></button>
+            <button class="btn btn--big btn--red"> <i class="fas fa-divide"></i></button>
+        </div>
+        <div class="question-area">
+            <span id="operand1">0</span>
+            <span id="operator">X</span>
+            <span id="operator2">0</span>
+            <span>=</span>
+            <p class="answer-message">Enter Answer:</p>
+            <input id="answer-box" type="number">
+    </div>
+<button class="btn btn--big gray">Submit Answer</button>
     <div class="score-aera">
         <p class="scores">Correct Answers <span id="score">0</span></p>
         <p class="scores">Incorrect Answers <span id="Incorrect">0</span></p></p>
