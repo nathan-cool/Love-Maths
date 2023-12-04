@@ -1,3 +1,4 @@
+let currentGameType;
 
 document.addEventListener('DOMContentLoaded', function () {
     let buttons = document.getElementsByTagName('button');
@@ -5,42 +6,111 @@ document.addEventListener('DOMContentLoaded', function () {
     for (let button of buttons) {
         button.addEventListener('click', function () {
             if (this.getAttribute('data-type') === 'submit') {
-                alert(" clicked the submit button");
+                checkAnswer();
             } else {
                 let gameType = this.getAttribute('data-type');
-                alert(`You clicked the ${gameType} button`);
+                runGame(gameType);
             }
         });
     }
+    runGame('addition');
 });
 
 
 
-function runGame() {
-    let num1 = math.floor(math.random() * 25) + 1;
-    let num2 = math.floor(math.random() * 25) + 1;
+function runGame(gameType) {
+    currentGameType = gameType;
+    let num1 = Math.floor(Math.random() * 25) + 1;
+    let num2 = Math.floor(Math.random() * 25) + 1;
 
+    if (gameType === 'addition') {
+        displayAdditionQuestion(num1, num2);
+        runGame('addition');
+    } else if (gameType === 'subtract') {
+        displaySubtractionQuestion(num1, num2);
+    } else if (gameType === 'multiply') {
+        displayMultiplicationQuestion(num1, num2);
+    } else if (gameType === 'division') {
+        displayDivisionQuestion(num1, num2);
+    }
+
+    
 }
 
 function checkAnswer() {
+    let userAnswer = parseInt(document.getElementById('answer-box').value);
+    let correctAnswer = calculateCorrectAnswer()[0];
+    if (userAnswer === correctAnswer) {
+        alert('correct answer');
+        incrementScore();
+        
+    } else {
+        alert(`wrong answer,correct answer is ${correctAnswer}`);
+        incrementWrongAnswer()
+       
+    }
+    runGame(currentGameType)
+}
+
     
-}
 
-function calculateCorrectAnswer() {
-}
 
-function incrementScore() {
-}
+    function calculateCorrectAnswer() {
+        let num1 = parseInt(document.getElementById('operand1').innerText)
+        let num2 = parseInt(document.getElementById('operand2').innerText)
+        let operator = document.getElementById('operator').innerText;
+
+        if (operator === '+') {
+            return [num1 + num2, 'addition'];
+        } else if (operator === '-') {
+            return [num1 - num2, 'subtract'];
+        } else if (operator === 'x') {
+            return [num1 * num2,'multiply'];
+        } else if (operator === '/') {
+            return [num1 / num2, 'division'];
+        }
+        
+    }
+
+    function incrementScore() {
+        let scoreElement = document.getElementById('score');
+        let score = parseInt(scoreElement.innerText);
+        score++;
+        scoreElement.innerText = score; 
+    }
+    
+    
+
 
 function incrementWrongAnswer() {
+    let wronganswer = document.getElementById('Incorrect');
+    let wrong = parseInt(wronganswer.innerText);
+    wrong++;
+    wronganswer.innerText = wrong;
     
 }
 
-function displayAdditionQustion() {
+function displayAdditionQuestion(operand1, operand2) {
+    document.getElementById('operand1').textContent = operand1;
+    document.getElementById('operand2').textContent = operand2;
+    document.getElementById('operator').textContent = '+';
 }
 
-function displaySubtractionQustion() {
+function displaySubtractionQuestion(operand1, operand2) {
+    document.getElementById('operand1').textContent = operand1;
+    document.getElementById('operand2').textContent = operand2;
+    document.getElementById('operator').textContent = '-';
 }
 
-function displayMultiplicationQustion() {
+function displayMultiplicationQuestion(operand1, operand2) {
+    document.getElementById('operand1').textContent = operand1;
+    document.getElementById('operand2').textContent = operand2;
+    document.getElementById('operator').textContent = 'x';
+    
+}
+
+function displayDivisionQuestion(operand1, operand2) {
+    document.getElementById('operand1').textContent = operand1;
+    document.getElementById('operand2').textContent = operand2;
+    document.getElementById('operator').textContent = '/';
 }
